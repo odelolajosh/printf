@@ -13,7 +13,7 @@ typedef struct handler
 {
 	char *specifier;
 	int (*f)(va_list, char *, unsigned int);
-} handler_t
+} handler_t;
 
 int _printf(const char *format, ...);
 
