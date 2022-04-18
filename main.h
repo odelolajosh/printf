@@ -5,9 +5,6 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-/* For debugging */
-#include <stdio.h>
-
 /**
  * struct handler - Struct handler
  *

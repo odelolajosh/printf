@@ -15,8 +15,7 @@ int _printf(const char *format, ...)
 	int (*handler)(va_list, char *, unsigned int);
 	va_list args;
 
-	va_start(args, format);
-	buffer = malloc(sizeof(char) * 1024);
+	va_start(args, format), buffer = malloc(sizeof(char) * 1024);
 	while (format && format[i])
 	{
 		if (format[i] == '%')
@@ -24,10 +23,7 @@ int _printf(const char *format, ...)
 			i++;
 			if (format[i] == '\0')
 			{
-				/* check for unprinted buffer */
-				if (ibuf != 0)
-					print_buf(buffer, ibuf);
-				free(buffer);
+				print_buf(buffer, ibuf), free(buffer), va_end(args);
 				return (-1);
 			}
 			else if (format[i] == '%')
@@ -35,11 +31,17 @@ int _printf(const char *format, ...)
 			else
 			{
 				handler = get_handl_func(format, i);
-				len += handler(args, buffer, ibuf);
+				if (handler == NULL)
+				{
+					handl_buf(buffer, format[i], ibuf);
+					len++, i--;
+				}
+				else
+					len += handler(args, buffer, ibuf);
 			}
 		}
 		else
-			handl_buf(buffer, format[i], ibuf), len++;
+		handl_buf(buffer, format[i], ibuf), len++;
 		i++, ibuf = len;
 		while (ibuf > 1024)
 			ibuf -= 1024;

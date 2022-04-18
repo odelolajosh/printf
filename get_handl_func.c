@@ -20,4 +20,6 @@ int (*get_handl_func(const char *s, int index))(va_list, char *, unsigned int)
 	for (; hn[i].specifier; i++)
 		if (s[index] == hn[i].specifier[0])
 			return (hn[i].f);
+
+	return (NULL);
 }
