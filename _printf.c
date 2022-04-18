@@ -36,10 +36,7 @@ int _printf(const char *format, ...)
 			{
 				handler = get_handl_func(format, i);
 				if (handler == NULL)
-				{
-					len++, i--;
-					handl_buf(buffer, format[i], ibuf);
-				}
+					len++, i--, handl_buf(buffer, format[i], ibuf);
 				else
 					len += handler(args, buffer, ibuf);
 			}
@@ -52,3 +49,4 @@ int _printf(const char *format, ...)
 	print_buf(buffer, ibuf), free(buffer), va_end(args);
 	return (len);
 }
+
