@@ -13,6 +13,8 @@ int (*get_handl_func(const char *s, int index))(va_list, char *, unsigned int)
 	handl_t hn[] = {
 		{"c", handl_ch},
 		{"s", handl_str},
+		{"i", handl_int},
+		{"d", handl_int},
 		{NULL, NULL},
 	};
 	int i = 0;
