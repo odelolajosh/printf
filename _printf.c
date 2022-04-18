@@ -1,5 +1,5 @@
 #include "main.h"
-#include <stdarg.h>
+#include <stdio.h>
 
 /**
  * _printf - produces output according to a format
@@ -8,30 +8,42 @@
  *
  * Return: number of chars printed
  */
-int _printf(const char *format, ...)
+int _printf (const char *format, ...)
 {
-	unsigned int len = 0, i = 0;
-	char* out_string;
+	unsigned int len = 0, i = 0, ibuf;
+	char *buffer;
+	int (*handler)(va_list, char *, unsigned int);
+
 	va_list args;
 	va_start(args, format);
-
+	buffer = malloc(sizeof(char) * 1024);
 	while (format && format[i])
 	{
-		++i; ++len;
 		if (format[i] == '%')
 		{
-			if (format[i + 1] == '%')
+			i++;
+			if (format[i] == '\0')
 			{
-				out_string[i] = '%';
-				continue;
+				/* check for unprinted buffer */
+				if (ibuf != 0)
+					print_buf(buffer, ibuf);
+				free(buffer);
+				return (-1);
 			}
-			else if (format[i + 1] == 'c')
+			else if (format[i] == '%')
+				handl_buf(buffer, format[i], ibuf), len++;
+			else
 			{
-				char c = va_args(args, char);
-				out_string[i];
+				handler = get_handl_func(format, i);
+				len += handler(args, buffer, ibuf);
 			}
 		}
-		out_string[i] = format[i];
+		else
+			handl_buf(buffer, format[i], ibuf), len++;
+		i++, ibuf = len;
+		while (ibuf > 1024)
+			ibuf -= 1024;
 	}
+	print_buf(buffer, ibuf), free(buffer), va_end(args);
 	return (len);
 }

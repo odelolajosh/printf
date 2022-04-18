@@ -8,5 +8,5 @@
  */
 int print_buf (char *buf, unsigned int n)
 {
-	return (write(1, buf, nbuf));
+	return (write(1, buf, n));
 }

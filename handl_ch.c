@@ -7,9 +7,14 @@
  * @buf: buffer pointer
  * @bufferIndex: index for buffer pointer
  *
- * Return: 1 on success
+ * Return: length of char addition
  */
-int handle_ch(va_list args, char *buf, unsigned int bufferIndex)
+int handl_ch(va_list args, char *buf, unsigned int bufferIndex)
 {
+	char c;
+
+	c = va_arg(args, int);
+	handl_buf(buf, c, bufferIndex);
+
 	return (1);
 }
