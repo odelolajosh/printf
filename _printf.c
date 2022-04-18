@@ -8,13 +8,13 @@
  *
  * Return: number of chars printed
  */
-int _printf (const char *format, ...)
+int _printf(const char *format, ...)
 {
 	unsigned int len = 0, i = 0, ibuf;
 	char *buffer;
 	int (*handler)(va_list, char *, unsigned int);
-
 	va_list args;
+
 	va_start(args, format);
 	buffer = malloc(sizeof(char) * 1024);
 	while (format && format[i])

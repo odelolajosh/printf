@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * handle_ch - handles writing character to stdout
+ * handl_ch - handles writing character to stdout
  *
  * @args: arguments
  * @buf: buffer pointer

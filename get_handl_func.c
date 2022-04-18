@@ -8,7 +8,7 @@
  *
  * Return: pointer to function
  */
-int (*get_handl_func(const char *s, int index ))(va_list, char *, unsigned int)
+int (*get_handl_func(const char *s, int index))(va_list, char *, unsigned int)
 {
 	handl_t hn[] = {
 		{"c", handl_ch},

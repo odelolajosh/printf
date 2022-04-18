@@ -3,7 +3,7 @@
 /**
  * handl_str - writes the string to stdout
  *
- * @arg: arguments
+ * @args: arguments
  * @buf: buffer pointer
  * @ibuf: index for buffer pointer
  *
