@@ -26,3 +26,4 @@ int handl_str(va_list args, char *buf, unsigned int ibuf)
 		ibuf = handl_buf(buf, str[i], ibuf);
 	return (i);
 }
+

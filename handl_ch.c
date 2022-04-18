@@ -18,3 +18,4 @@ int handl_ch(va_list args, char *buf, unsigned int bufferIndex)
 
 	return (1);
 }
+

@@ -21,3 +21,4 @@ unsigned int handl_buf(char *buf, char c, unsigned int ibuf)
 	ibuf++;
 	return (ibuf);
 }
+
