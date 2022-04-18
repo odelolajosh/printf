@@ -1,8 +1,8 @@
 #include "main.h"
 
 /**
- * print_int - prints an integer
- * 
+ * handl_int - prints an integer
+ *
  * @args: arguments
  * @buf: buffer pointer
  * @ibuf: index for the buffer
@@ -39,6 +39,4 @@ int handl_int(va_list args, char *buf, unsigned int ibuf)
 
 	return (i + isneg);
 }
-
-
 
