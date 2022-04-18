@@ -10,41 +10,39 @@
  */
 int _printf(const char *format, ...)
 {
-	unsigned int len = 0, i = 0, ibuf;
+	unsigned int len = 0, i = 0, ibuf = 0;
 	char *buffer;
 	int (*handler)(va_list, char *, unsigned int);
 	va_list args;
 
 	va_start(args, format), buffer = malloc(sizeof(char) * 1024);
-	while (format && format[i])
+	if (!format || (format[0] == '%' && !format[1]))
+		return (-1);
+	if (!format[i])
+		return (0);
+	for (i = 0; format && format[i]; i++)
 	{
 		if (format[i] == '%')
 		{
 			i++;
-			if (format[i] == '\0')
+			if (format[i] == '%')
 			{
-				print_buf(buffer, ibuf), free(buffer), va_end(args);
-				return (-1);
-			}
-			else if (format[i] == '%')
 				handl_buf(buffer, format[i], ibuf), len++;
-			else
-			{
-				handler = get_handl_func(format, i);
-				if (handler == NULL)
-				{
-					handl_buf(buffer, format[i], ibuf);
-					len++, i--;
-				}
-				else
-					len += handler(args, buffer, ibuf);
+				continue;
 			}
+			handler = get_handl_func(format, i);
+			if (handler == NULL)
+			{
+				len++, i--;
+				handl_buf(buffer, format[i], ibuf);
+			}
+			else
+				len += handler(args, buffer, ibuf);
 		}
 		else
-		handl_buf(buffer, format[i], ibuf), len++;
-		i++, ibuf = len;
-		while (ibuf > 1024)
-			ibuf -= 1024;
+			handl_buf(buffer, format[i], ibuf), len++;
+		for (ibuf = len; ibuf > 1024; ibuf -= 1024)
+			;
 	}
 	print_buf(buffer, ibuf), free(buffer), va_end(args);
 	return (len);
