@@ -26,18 +26,23 @@ int _printf(const char *format, ...)
 		{
 			i++;
 			if (format[i] == '%')
-			{
 				handl_buf(buffer, format[i], ibuf), len++;
-				continue;
-			}
-			handler = get_handl_func(format, i);
-			if (handler == NULL)
+			else if (format[i] == '\0')
 			{
-				len++, i--;
-				handl_buf(buffer, format[i], ibuf);
+				print_buf(buffer, ibuf), free(buffer), va_end(args);
+				return (-1);
 			}
 			else
-				len += handler(args, buffer, ibuf);
+			{
+				handler = get_handl_func(format, i);
+				if (handler == NULL)
+				{
+					len++, i--;
+					handl_buf(buffer, format[i], ibuf);
+				}
+				else
+					len += handler(args, buffer, ibuf);
+			}
 		}
 		else
 			handl_buf(buffer, format[i], ibuf), len++;
