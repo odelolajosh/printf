@@ -15,6 +15,7 @@ int (*get_handl_func(const char *s, int index))(va_list, char *, unsigned int)
 		{"s", handl_str},
 		{"i", handl_int},
 		{"d", handl_int},
+		{"b", handl_bnr},
 		{NULL, NULL},
 	};
 	int i = 0;

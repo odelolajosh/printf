@@ -24,6 +24,9 @@ unsigned int handl_buf(char *, char, unsigned int);
 int handl_ch(va_list, char *, unsigned int);
 int handl_str(va_list, char *, unsigned int);
 int handl_int(va_list, char *, unsigned int);
+int handl_bnr(va_list, char *, unsigned int);
+
+char *fill_decimal_to_binary(char *, long int, int, int);
 
 #endif /* _MAIN_H_ */
 
