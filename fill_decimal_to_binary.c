@@ -10,7 +10,8 @@
  *
  * Return: pointer to output
  */
-char *fill_decimal_to_binary(char *binary, long int input, int isneg, int limit)
+char *fill_decimal_to_binary(char *binary, long int input
+		, int isneg, int limit)
 {
 	int i;
 

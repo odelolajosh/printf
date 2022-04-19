@@ -20,7 +20,7 @@ int handl_bnr(va_list args, char *buf, unsigned int ibuf)
 		ibuf = handl_buf(buf, '0', ibuf);
 		return (1);
 	}
-	
+
 	if (input < 0)
 	{
 		input = (input * -1) - 1;
