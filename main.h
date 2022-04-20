@@ -31,8 +31,8 @@ int handl_hex(va_list, char *, unsigned int);
 int handl_uppx(va_list, char *, unsigned int);
 int handl_S(va_list, char *, unsigned int);
 int handl_addr(va_list, char *, unsigned int);
-int print_rev(va_list, char *, unsigned int);
-int print_rot(va_list, char *, unsigned int);
+int handl_rev(va_list, char *, unsigned int);
+int handl_rot(va_list, char *, unsigned int);
 
 char *fill_decimal_to_binary(char *, long int, int, int);
 char *fill_binary_to_oct(char *, char *);
