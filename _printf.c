@@ -16,7 +16,7 @@ int _printf(const char *format, ...)
 	va_list args;
 
 	va_start(args, format), buffer = malloc(sizeof(char) * 1024);
-	if (!format || (format[0] == '%' && !format[1]))
+	if (!format || !buffer || (format[i] == '%' && !format[i + 1]))
 		return (-1);
 	if (!format[i])
 		return (0);
@@ -36,7 +36,11 @@ int _printf(const char *format, ...)
 			{
 				handler = get_handl_func(format, i);
 				if (handler == NULL)
+				{
+					if (format[i + 1] == ' ' && !format[i + 2])
+						return (-1);
 					len++, i--, handl_buf(buffer, format[i], ibuf);
+				}
 				else
 					len += handler(args, buffer, ibuf);
 			}
