@@ -12,7 +12,7 @@ int handl_S(va_list arguments, char *buf, unsigned int ibuf)
 	unsigned char *str;
 	char *hexadecimal, *binary;
 	unsigned int i, sum, op;
-	
+
 	str = va_arg(arguments, unsigned char *);
 	binary = malloc(sizeof(char) * (32 + 1));
 	hexadecimal = malloc(sizeof(char) * (8 + 1));
