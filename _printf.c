@@ -2,24 +2,20 @@
 #include <stdio.h>
 
 /**
- * _printf - produces output according to a format
+ * _format - replaces format specifiers with arguments
  *
  * @format: given string
+ * @args: arguments
  *
  * Return: number of chars printed
  */
-int _printf(const char *format, ...)
+int _format(const char *format, va_list args)
 {
 	unsigned int len = 0, i = 0, ibuf = 0;
 	char *buffer;
 	int (*handler)(va_list, char *, unsigned int);
-	va_list args;
 
-	va_start(args, format), buffer = malloc(sizeof(char) * 1024);
-	if (!format || !buffer || (format[i] == '%' && !format[i + 1]))
-		return (-1);
-	if (!format[i])
-		return (0);
+	buffer = malloc(sizeof(char) * 1024);
 	for (i = 0; format && format[i]; i++)
 	{
 		if (format[i] == '%')
@@ -29,7 +25,7 @@ int _printf(const char *format, ...)
 				handl_buf(buffer, format[i], ibuf), len++;
 			else if (format[i] == '\0')
 			{
-				print_buf(buffer, ibuf), free(buffer), va_end(args);
+				print_buf(buffer, ibuf), free(buffer);
 				return (-1);
 			}
 			else
@@ -50,7 +46,25 @@ int _printf(const char *format, ...)
 		for (ibuf = len; ibuf > 1024; ibuf -= 1024)
 			;
 	}
-	print_buf(buffer, ibuf), free(buffer), va_end(args);
+	print_buf(buffer, ibuf), free(buffer);
 	return (len);
 }
 
+
+/**
+ * _printf - produces output according to a format
+ *
+ * @format: given string
+ *
+ * Return: number of chars printed
+ */
+int _printf(const char *format, ...)
+{
+	unsigned int len = 0;
+	va_list args;
+
+	va_start(args, format);
+	len = _format(format, args);
+	va_end(args);
+	return (len);
+}
