@@ -16,6 +16,8 @@ int _format(const char *format, va_list args)
 	int (*handler)(va_list, char *, unsigned int);
 
 	buffer = malloc(sizeof(char) * 1024);
+	if (!format || !buffer || (format[i] == '%' && !format[i + 1]))
+		return (-1);
 	for (i = 0; format && format[i]; i++)
 	{
 		if (format[i] == '%')
@@ -64,6 +66,8 @@ int _printf(const char *format, ...)
 	va_list args;
 
 	va_start(args, format);
+	if (!format)
+		return (-1);
 	len = _format(format, args);
 	va_end(args);
 	return (len);
