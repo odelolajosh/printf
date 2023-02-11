@@ -3,3 +3,6 @@ main.c
 
 # folder where all executables are places
 x/
+
+# vscode settings
+.vscode/
